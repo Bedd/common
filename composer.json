@@ -1,0 +1,24 @@
+{
+    "name": "bedd/common",
+    "description": "PHP common library and utils",
+    "keywords": ["utils", "common", "traits"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {"name": "Sven Muhle"}
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bedd\\Common\\": "src/"
+        },
+        "exclude-from-classmap": [
+            "tests/"
+        ]
+    }
+}
