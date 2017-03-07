@@ -84,7 +84,7 @@ class ArrayUtils
      * Returns the value of the first found key-name
      *
      * @param array $input
-     * @param array $keys
+     * @param string[] $keys
      * @param string $default
      * @return mixed
      */
