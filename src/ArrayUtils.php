@@ -23,7 +23,7 @@ class ArrayUtils
         if (function_exists('array_column')) {
             return array_column($input, $column_key, $index_key);
         }
-        $arr = array_map(function ($d) use ($column_key, $index_key) {
+        $arr = array_map(function($d) use ($column_key, $index_key) {
         if (!isset($d[$column_key])) {
             return null;
         }
@@ -31,7 +31,7 @@ class ArrayUtils
             return [$d[$index_key] => $d[$column_key]];
         }
         return $d[$column_key];
-      }, $input);
+        }, $input);
         if ($index_key !== null) {
             $tmp = [];
             foreach ($arr as $ar) {
@@ -113,7 +113,7 @@ class ArrayUtils
         $awr_func = $preserve_keys
         ? function ($v, $k) use (&$return) {$return[$k] = $v;}
         : function ($v) use (&$return) {$return[] = $v;}
-      ;
+        ;
         array_walk_recursive($input, $awr_func);
         return $return;
     }
