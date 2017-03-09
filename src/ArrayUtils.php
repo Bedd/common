@@ -118,6 +118,14 @@ class ArrayUtils
         return $return;
     }
 
+    /**
+     * Rename a key inside a dimensional array
+     *
+     * @param array $input
+     * @param string old_key
+     * @param string new_key
+     * @return array
+     */
     public static function renameKey(array $input, $old_key, $new_key)
     {
         $ret = $input;
