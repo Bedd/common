@@ -1,6 +1,8 @@
 <?php
 namespace Bedd\Common\Traits;
 
+use Bedd\Common\TestCase;
+
 class TestClassA
 {
     use SingletonTrait;
@@ -12,7 +14,7 @@ class TestClassB
 /**
  * SingletonTraitTest
  */
-class SingletonTraitTest extends \PHPUnit_Framework_TestCase
+class SingletonTraitTest extends TestCase
 {
     /**
      * Test for Bedd\Common\Utils\SingletonTrait

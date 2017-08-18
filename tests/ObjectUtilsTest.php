@@ -9,7 +9,7 @@ class TestClassA
 /**
  * ObjectUtilsTest
  */
-class ObjectUtilsTest extends \PHPUnit_Framework_TestCase
+class ObjectUtilsTest extends TestCase
 {
     /**
      * Test for Bedd\Common\ObjectUtils::getConstants

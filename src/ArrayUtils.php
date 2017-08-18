@@ -11,54 +11,36 @@ class ArrayUtils
     use StaticClassTrait;
 
     /**
-     * Return the values from a single column in the input array
+     * Test whether an array contains one or more keys by defined $type
      *
+     * @param string $input the Type: string|int
      * @param array $input
-     * @param string|int $column_key
-     * @param string $index_key
-     * @return null|array
+     * @param bool $only
+     * @param bool $allow_empty Should an empty $input return true
+     * @return bool
      */
-    public static function column(array $input, $column_key, $index_key = null)
+    private static function hasKeysByType($type, array $input, $only = false, $allow_empty = false)
     {
-        if (function_exists('array_column')) {
-            return array_column($input, $column_key, $index_key);
+        if (!is_array($input)) {
+          return false;
         }
-        $arr = array_map(function($d) use ($column_key, $index_key) {
-        if (!isset($d[$column_key])) {
-            return null;
+        if (!$input) {
+          return $allow_empty;
         }
-        if ($index_key !== null) {
-            return [$d[$index_key] => $d[$column_key]];
-        }
-        return $d[$column_key];
-        }, $input);
-        if ($index_key !== null) {
-            $tmp = [];
-            foreach ($arr as $ar) {
-                $tmp[key($ar)] = current($ar);
-            }
-            $arr = $tmp;
-        }
-        return $arr;
+        $count = count(array_filter(array_keys($input), 'is_'.strtolower($type)));
+        return  $only ? $count === count($input) : $count > 0;
     }
-
     /**
      * Test whether an array contains one or more string keys
      *
      * @param array $input
      * @param bool $only
-     * @param bool $allow_empty Should an empty array() return true
+     * @param bool $allow_empty Should an empty $input return true
      * @return bool
      */
     public static function hasStringKeys(array $input, $only = false, $allow_empty = false)
     {
-        if (!is_array($input)) {
-            return false;
-        }
-        if (!$input) {
-            return $allow_empty;
-        }
-        return count(array_filter(array_keys($input), 'is_string')) > ($only ? count($input) : 0);
+        return self::hasKeysByType('string', $input, $only, $allow_empty);
     }
 
     /**
@@ -66,18 +48,12 @@ class ArrayUtils
      *
      * @param array $input
      * @param bool $only
-     * @param bool $allow_empty    Should an empty array() return true
+     * @param bool $allow_empty Should an empty $input return true
      * @return bool
      */
     public static function hasIntegerKeys(array $input, $only = false, $allow_empty = false)
     {
-        if (!is_array($input)) {
-            return false;
-        }
-        if (!$input) {
-            return $allow_empty;
-        }
-        return count(array_filter(array_keys($input), 'is_int')) > ($only ? count($input) : 0);
+        return self::hasKeysByType('int', $input, $only, $allow_empty);
     }
 
     /**
@@ -85,7 +61,7 @@ class ArrayUtils
      *
      * @param array $input
      * @param string[] $keys
-     * @param string $default
+     * @param mixed $default
      * @return mixed
      */
     public static function findValueByKeys(array $input, array $keys, $default = null)
@@ -110,9 +86,9 @@ class ArrayUtils
     public static function flatten(array $input, $preserve_keys = false)
     {
         $return = [];
-        $awr_func = $preserve_keys
-        ? function ($v, $k) use (&$return) {$return[$k] = $v;}
-        : function ($v) use (&$return) {$return[] = $v;}
+        $awr_func = $preserve_keys ?
+            function ($v, $k) use (&$return) {$return[$k] = $v;} :
+            function ($v) use (&$return) {$return[] = $v;}
         ;
         array_walk_recursive($input, $awr_func);
         return $return;
@@ -129,7 +105,7 @@ class ArrayUtils
     public static function renameKey(array $input, $old_key, $new_key)
     {
         $ret = $input;
-        if (array_key_exists($old_key, $input)) {
+        if ($old_key !== $new_key && array_key_exists($old_key, $input)) {
             $keys = array_keys($input);
             $offset = array_search($old_key, $keys);
             $keys[$offset] = $new_key;

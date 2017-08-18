@@ -20,5 +20,13 @@
         "exclude-from-classmap": [
             "tests/"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bedd\\Common\\": "src/"
+        },
+        "files": [
+            "tests/TestCase.php"
+        ]
     }
 }
