@@ -17,15 +17,16 @@ class ArrayUtils
      * @param array $input
      * @param bool $only
      * @param bool $allow_empty Should an empty $input return true
+     * @param string $type
      * @return bool
      */
     private static function hasKeysByType($type, array $input, $only = false, $allow_empty = false)
     {
         if (!is_array($input)) {
-          return false;
+            return false;
         }
         if (!$input) {
-          return $allow_empty;
+            return $allow_empty;
         }
         $count = count(array_filter(array_keys($input), 'is_'.strtolower($type)));
         return  $only ? $count === count($input) : $count > 0;
@@ -87,8 +88,8 @@ class ArrayUtils
     {
         $return = [];
         $awr_func = $preserve_keys ?
-            function ($v, $k) use (&$return) {$return[$k] = $v;} :
-            function ($v) use (&$return) {$return[] = $v;}
+            function($v, $k) use (&$return) {$return[$k] = $v; } :
+            function($v) use (&$return) {$return[] = $v; }
         ;
         array_walk_recursive($input, $awr_func);
         return $return;
