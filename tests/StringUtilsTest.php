@@ -90,4 +90,32 @@ class StringUtilsTest extends TestCase
     {
         $this->assertEquals($expected, StringUtils::endsWith($string, $query));
     }
+    
+    public function convertToBoolProvider()
+    {
+        return [
+            //true
+            ['true', false, true],
+            ['ja', false, true],
+            ['YES', false, true],
+            ['1', false, true],
+            ['wurst', true, true],
+            [null, true, true],
+            //false
+            ['false', true, false],
+            ['nein', false, false],
+            ['0', false, false],
+            ['no', true, false],
+            ['NO', true, false],
+            [0, true, false],
+        ];
+    }
+    /**
+     * Test for Bedd\Common\StringUtils::convertToBool
+     * @dataProvider convertToBoolProvider
+     */
+    public function testConvertToBool($string, $default, $expected)
+    {
+        $this->assertEquals($expected, StringUtils::convertToBool($string, $default));
+    }
 }

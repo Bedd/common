@@ -63,4 +63,27 @@ class StringUtils
     {
         return $query === '' || substr($string, -strlen($query)) === $query;
     }
+    
+    /**
+     * Converts $string into a bool. Supports english and german words
+     *
+     * @param string $string
+     * @param bool $default
+     * @return boolean
+     */
+    public static function convertToBool($string, $default = false)
+    {
+        $return = $default;
+        $yes = ['true', 't', 'yes', 'y', 'ja', 'j', '1'];
+        $no = ['false', 'f', 'no', 'n', 'nein', '0'];
+        if (is_scalar($string)) {
+            $string = strtolower((string) $string);
+            if (in_array($string, $yes)) {
+                $return = true;
+            } else if(in_array($string, $no)) {
+                $return = false;
+            }
+        }
+        return (bool) $return;
+    }
 }
