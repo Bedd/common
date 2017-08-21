@@ -13,11 +13,10 @@ class ArrayUtils
     /**
      * Test whether an array contains one or more keys by defined $type
      *
-     * @param string $input the Type: string|int
+     * @param string $type the Type: string|int
      * @param array $input
      * @param bool $only
      * @param bool $allow_empty Should an empty $input return true
-     * @param string $type
      * @return bool
      */
     private static function hasKeysByType($type, array $input, $only = false, $allow_empty = false)
@@ -25,7 +24,7 @@ class ArrayUtils
         if (!is_array($input)) {
             return false;
         }
-        if (!$input) {
+        if (empty($input)) {
             return $allow_empty;
         }
         $count = count(array_filter(array_keys($input), 'is_'.strtolower($type)));
