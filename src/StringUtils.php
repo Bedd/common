@@ -80,7 +80,7 @@ class StringUtils
             $string = strtolower((string) $string);
             if (in_array($string, $yes)) {
                 $return = true;
-            } else if(in_array($string, $no)) {
+            } else if (in_array($string, $no)) {
                 $return = false;
             }
         }
