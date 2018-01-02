@@ -12,5 +12,35 @@ The best way to install this library is to use [composer](https://getcomposer.or
 }
 ```
 
+## Utils
+### Arrays
+- ArrayUtils::hasStringKeys
+- ArrayUtils::hasIntegerKeys
+- ArrayUtils::findValueByKeys
+- ArrayUtils::flatten
+- ArrayUtils::renameKey
+
+### Date Times
+- DateTimeUtils::SECONDS_PER_MINUTE
+- DateTimeUtils::SECONDS_PER_HOUR
+- DateTimeUtils::SECONDS_PER_DAY
+- DateTimeUtils::SECONDS_PER_WEEK
+- DateTimeUtils::SECONDS_PER_MONTH
+- DateTimeUtils::SECONDS_PER_YEAR
+
+### Objects
+- ObjectUtils::getConstants
+
+### Strings
+- StringUtils::splitOnUpperCase
+- StringUtils::splitOnLowerCase
+- StringUtils::startsWith
+- StringUtils::endsWith
+- StringUtils::convertToBool
+
+## Traits
+- SingletonTrait
+- StaticClassTrait
+
 ## License
 This library is available under the [MIT license](LICENSE).
